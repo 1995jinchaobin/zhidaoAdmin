@@ -183,9 +183,9 @@ export default new Router({
                   component: () => import('../views/masksManage/MasksManage')
                 },
                 {
-                  path:'/supplyReview',
-                  name:'supplyReview',
-                  component: () => import('../views/masksManage/supplyReview')
+                  path:'/publish',
+                  name:'Publish',
+                  component: () => import('../views/content/Publish')
                 }
               ]
     }

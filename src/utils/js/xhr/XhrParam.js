@@ -24,10 +24,10 @@ export default {
   /**
    * 默认请求地址
    */
-  BASE_HTTP: `http://192.168.1.115:8888`,
+  // BASE_HTTP: `http://192.168.1.115:8888`, //线下地址
   // BASE_HTTP: `http://127.0.0.1:80`,
-  // BASE_HTTP: `/ycapi`,
-
+  // BASE_HTTP: `/ycapi`,// 线上地址
+  BASE_HTTP: `http://admin.youchaikj.com/ycapi/`,// 线上正式地址
   /**
    * 默认请求头参数
    */

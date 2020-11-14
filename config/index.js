@@ -14,7 +14,7 @@ module.exports = {
       '/ycapi': {
         // target: 'http://192.168.1.150:82',
         target: 'http://192.168.1.115:8888',
-        //target: 'http://admin.youchaikj.com',
+        // target: 'http://admin.youchaikj.com',
         changeOrigin: true,
         pathRewrite: {
           '^/ycapi': ''
