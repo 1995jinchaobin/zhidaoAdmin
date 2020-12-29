@@ -3,18 +3,20 @@
     <div class="note">
       <div class="noteText">热力图</div>
     </div>
-    
+
     <div class="data">
       <div class="dataContent">
         <div class="searchArea">
           <div class="searchForm">
             <el-form :inline="true" class="demo-form-inline">
               <el-form-item label="用户编号:">
-                <el-input v-model="searchParams.getMonitorClicks.userId" placeholder="用户编号"></el-input>
+                <el-input
+                  v-model="searchParams.getMonitorClicks.userId"
+                  placeholder="用户编号"
+                ></el-input>
               </el-form-item>
               <el-form-item label="路由:">
                 <el-cascader
-                  
                   checkStrictly="true"
                   v-model="searchParams.getMonitorClicks.router"
                   :options="router"
@@ -22,10 +24,17 @@
                 <!-- <el-input v-model="searchParams.getMonitorClicks.router" placeholder="路由"></el-input> -->
               </el-form-item>
               <el-form-item label="ip:">
-                <el-input v-model="searchParams.getMonitorClicks.ip" placeholder="ip"></el-input>
+                <el-input
+                  v-model="searchParams.getMonitorClicks.ip"
+                  placeholder="ip"
+                ></el-input>
               </el-form-item>
               <el-form-item label="数据量:">
-                <el-input type="number" v-model="page.rows" placeholder="数据量"></el-input>
+                <el-input
+                  type="number"
+                  v-model="page.rows"
+                  placeholder="数据量"
+                ></el-input>
               </el-form-item>
 
               <el-date-picker
@@ -44,7 +53,9 @@
                 placeholder="选择结束时间"
               ></el-date-picker>
               <el-form-item>
-                <el-button type="primary"  @click="getData">生成热力图</el-button>
+                <el-button type="primary" @click="getData"
+                  >生成热力图</el-button
+                >
               </el-form-item>
               <el-form-item>
                 <el-button plain @click="reset">重&nbsp;&nbsp;置</el-button>
@@ -53,11 +64,10 @@
           </div>
         </div>
         <div id="container"></div>
-      <div class="containerbackimgdiv">
-        <img class="containerbackimg" :src="Heatimg" alt />
+        <div class="containerbackimgdiv">
+          <img class="containerbackimg" :src="Heatimg" alt />
+        </div>
       </div>
-      </div>
-      
     </div>
   </div>
 </template>
@@ -69,7 +79,7 @@ import messageUtil from "../../utils/js/MessageUtil";
 export default {
   name: "ThermodynamicDiagram",
   path: "thermodynamicDiagram",
-  data() {
+  data () {
     return {
       //请求的接口
       actions: {
@@ -176,49 +186,50 @@ export default {
             },
             {
               value: "个人中心/我的素材",
-              label: "我的素材",             
+              label: "我的素材",
             },
             {
               value: "个人中心/我的版权",
-              label: "我的版权",             
+              label: "我的版权",
             },
             {
               value: "个人中心/我的发票",
-              label: "我的发票",             
+              label: "我的发票",
             },
             {
               value: "个人中心/购物车",
-              label: "购物车",             
+              label: "购物车",
             },
             {
               value: "个人中心/我的钱包",
-              label: "我的钱包",             
+              label: "我的钱包",
             },
             {
               value: "个人中心/修改密码",
-              label: "修改密码",             
+              label: "修改密码",
             },
             {
               value: "个人中心/创建子账号",
-              label: "创建子账号",             
+              label: "创建子账号",
             },
             {
               value: "个人中心/个人信息",
-              label: "个人信息",             
+              label: "个人信息",
             },
             {
               value: "个人中心/我的素材",
-              label: "我的素材",             
+              label: "我的素材",
             },
             {
               value: "个人中心/我的订单",
-              label: "我的订单",             
-            }]},
-        
+              label: "我的订单",
+            }]
+        },
+
         {
           // value: '',
           label: "工作室",
-          children: [         
+          children: [
             {
               value: "工作室主页/上传素材",
               label: "上传素材"
@@ -284,7 +295,7 @@ export default {
   },
   methods: {
     //热力图相关
-    generateData(theta, min, max, noise, xData, yData) {
+    generateData (theta, min, max, noise, xData, yData) {
       var data = [];
       for (var i = 0; i <= 200; i++) {
         for (var j = 0; j <= 100; j++) {
@@ -301,20 +312,20 @@ export default {
       }
       return data;
     },
-    getNoiseHelper(global) {
+    getNoiseHelper (global) {
       var module = {};
 
-      function Grad(x, y, z) {
+      function Grad (x, y, z) {
         this.x = x;
         this.y = y;
         this.z = z;
       }
 
-      Grad.prototype.dot2 = function(x, y) {
+      Grad.prototype.dot2 = function (x, y) {
         return this.x * x + this.y * y;
       };
 
-      Grad.prototype.dot3 = function(x, y, z) {
+      Grad.prototype.dot3 = function (x, y, z) {
         return this.x * x + this.y * y + this.z * z;
       };
 
@@ -596,7 +607,7 @@ export default {
 
       // This isn't a very good seeding function, but it works ok. It supports 2^16
       // different seed values. Write something better if you need more seeds.
-      module.seed = function(seed) {
+      module.seed = function (seed) {
         if (seed > 0 && seed < 1) {
           // Scale the seed out
           seed *= 65536;
@@ -629,7 +640,7 @@ export default {
       var G3 = 1 / 6;
 
       // 2D simplex noise
-      module.simplex2 = function(xin, yin) {
+      module.simplex2 = function (xin, yin) {
         var n0, n1, n2; // Noise contributions from the three corners
         // Skew the input space to determine which simplex cell we're in
         var s = (xin + yin) * F2; // Hairy factor for 2D
@@ -691,7 +702,7 @@ export default {
       };
 
       // 3D simplex noise
-      module.simplex3 = function(xin, yin, zin) {
+      module.simplex3 = function (xin, yin, zin) {
         var n0, n1, n2, n3; // Noise contributions from the four corners
 
         // Skew the input space to determine which simplex cell we're in
@@ -817,16 +828,16 @@ export default {
 
       // ##### Perlin noise stuff
 
-      function fade(t) {
+      function fade (t) {
         return t * t * t * (t * (t * 6 - 15) + 10);
       }
 
-      function lerp(a, b, t) {
+      function lerp (a, b, t) {
         return (1 - t) * a + t * b;
       }
 
       // 2D Perlin Noise
-      module.perlin2 = function(x, y) {
+      module.perlin2 = function (x, y) {
         // Find unit grid cell containing point
         var X = Math.floor(x),
           Y = Math.floor(y);
@@ -850,7 +861,7 @@ export default {
       };
 
       // 3D Perlin Noise
-      module.perlin3 = function(x, y, z) {
+      module.perlin3 = function (x, y, z) {
         // Find unit grid cell containing point
         var X = Math.floor(x),
           Y = Math.floor(y),
@@ -892,10 +903,10 @@ export default {
 
       return module;
     },
-    generatestart() {
+    generatestart () {
       this.getData();
     },
-    generate() {
+    generate () {
       let self = this;
       var dom = document.getElementById("container");
       var myChart = echarts.init(dom);
@@ -931,8 +942,11 @@ export default {
           self.tableData[i].num,
           number
         );
+        console.log(number)
         self.resData[number][2] += self.tableData[i].num * self.zoom;
       }
+      console.log(self.zoom)
+      console.log(self.resData)
       option = {
         tooltip: {},
         xAxis: {
@@ -971,10 +985,11 @@ export default {
           }
         ]
       };
+      console.log(option)
       myChart.setOption(option, true);
     },
     //画圆
-    DrawCircle(x, y, num, number) {
+    DrawCircle (x, y, num, number) {
       let self = this;
       //dx横向距离 dy纵向距离
       for (let dx = 0; dx <= 5; dx++) {
@@ -1000,14 +1015,14 @@ export default {
         }
       }
     },
-    query() {
+    query () {
       //查询
       this.page.page = 1;
       this.page.rows = 10;
       this.page.total = 0;
       this.getData();
     },
-    reset() {
+    reset () {
       //重置
       this.page.rows = 10000;
       this.searchParams.getMonitorClicks.startTime = "";
@@ -1017,15 +1032,14 @@ export default {
       this.searchParams.getMonitorClicks.router = "";
     },
     //列表查询
-    getData() {
+    getData () {
       if (this.searchParams.getMonitorClicks.router == "") {
         this.searchParams.getMonitorClicks.router = "首页";
       }
       if (this.page.rows < 0) {
         this.page.rows = 10000;
       }
-     if(typeof(this.searchParams.getMonitorClicks.router)=="object")
-     {this.searchParams.getMonitorClicks.router = this.searchParams.getMonitorClicks.router.join("").split(",").join("");}           
+      if (typeof (this.searchParams.getMonitorClicks.router) == "object") { this.searchParams.getMonitorClicks.router = this.searchParams.getMonitorClicks.router.join("").split(",").join(""); }
       httpUtil.xhrPost(
         this,
         this.actions.getMonitorClicks,
@@ -1035,10 +1049,11 @@ export default {
         },
         data => {
           this.tableData = data.data.list;
+          console.log(data.data)
           this.page.total = data.data.total;
           let self = this;
           //  let img=this.tableData[0].routerEn.substr(1);
-          if(this.tableData==""){
+          if (this.tableData == "") {
             messageUtil.message.error("暂无数据");
           }
           let img = this.tableData[0].routerEn.split("/").join("");
@@ -1049,7 +1064,7 @@ export default {
       );
     }
   },
-  mounted() {
+  mounted () {
     this.getData();
   }
 };
@@ -1125,7 +1140,7 @@ export default {
 #container {
   width: 1200px;
   height: 737px;
-  left:calc(50% - 600px);
+  left: calc(50% - 600px);
   margin-top: 24px;
   z-index: 2;
   opacity: 0.5;
@@ -1133,16 +1148,16 @@ export default {
 .containerbackimgdiv {
   width: 1200px;
   height: 800px;
-  left:calc(50% - 600px);
+  left: calc(50% - 600px);
   position: absolute;
   top: 150px;
 }
 .containerbackimg {
   position: relative;
-    top: 83px;
-    opacity: 1;
-    width: 960px;
-    height: 617px;
-    left: 120px;
+  top: 83px;
+  opacity: 1;
+  width: 960px;
+  height: 617px;
+  left: 120px;
 }
 </style>
